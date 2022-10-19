@@ -23,7 +23,19 @@ const getAll = createAsyncThunk(
             return rejectWithValue(e.response.data)
         }
     }
-)
+);
+
+const getById = createAsyncThunk(
+    'movieSlice/getById',
+    async ({id}, {rejectWithValue}) => {
+        try {
+            const {data} = await movieService.getByIdMovies(id);
+            return data
+        } catch (e) {
+            return rejectWithValue(e.response.data)
+        }
+    }
+);
 
 const movieSlice = createSlice({
     name: 'movieSlice',
@@ -31,10 +43,6 @@ const movieSlice = createSlice({
     reducers: {},
     extraReducers: builder =>
         builder
-            // .addCase(getAll.fulfilled, (state, action) => {
-            //     state.movies = action.payload
-            //     state.loading = false
-            // })
             .addCase(getAll.fulfilled, (state, action) => {
                 const {page, results} = action.payload
                 state.page = page
@@ -42,6 +50,7 @@ const movieSlice = createSlice({
 
                 state.loading = false
             })
+
             .addCase(getAll.rejected, (state, action) => { // отклоненный
                 state.error = action.payload
                 state.loading = false
@@ -50,14 +59,20 @@ const movieSlice = createSlice({
 
                 state.loading = true
             })
+            .addCase(getById.fulfilled, (state, action) => {
+                state.movieFromApi = action.payload
+                state.loading = false
+            })
 
 
 })
 
-const {reducer: movieReducer, actions} = movieSlice;
+const {reducer: movieReducer, actions:{}} = movieSlice;
 
 const movieActions = {
-    getAll
+    getAll,
+    getById
+
 };
 
 export {

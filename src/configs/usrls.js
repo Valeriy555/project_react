@@ -2,6 +2,7 @@ const baseURL = 'https://api.themoviedb.org/3'
 
 const urls = {
     discoverMovies:'/discover/movie',
+    movie:'/movie',
     genreMovies:'genre/movie/list'
 }
 
