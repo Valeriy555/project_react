@@ -1,10 +1,11 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
+import {useSearchParams} from "react-router-dom";
 
 import {movieActions} from "../../redux";
-import {MoviesListCard} from "../MoviesListCard";
+import {MoviesListCard} from "../MoviesListCard/MoviesListCard";
+
 import css from './MoviesList.module.css'
-import {useSearchParams} from "react-router-dom";
 
 
 const MoviesList = () => {
@@ -37,7 +38,7 @@ const MoviesList = () => {
             {error && <h1>Error</h1>}
             <div className={css.wrap}>
                 {movies?.map(movie => <MoviesListCard key={movie.id} movie={movie}/>)}
-                <button disabled={!page} onClick={prevPage}>prevPage</button>
+                <button disabled={page === 1} onClick={prevPage}>prevPage</button>
                 <button disabled={page>499} onClick={nextPage}>nextPage</button>
             </div>
 

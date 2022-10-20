@@ -1,24 +1,23 @@
-import {MoviesList} from "./components/MoviesList";
-import {Route, Routes} from "react-router-dom";
+import {Navigate, Route, Routes} from "react-router-dom";
+
 import {MainLayout} from "./layots";
-import {MovieInfo} from "./components/MovieInfo";
+import {MovieInfoPage, MoviesListPage} from "./pages";
 
 
 function App() {
     return (
-        <div>
-            <Routes>
-                <Route path={'/'} element={<MainLayout/>}/>
-                <Route path={'users'} element={<UsersPage/>}/>
-                <Route path={'users/:id'} element={<SingleUserPage/>}/>
-                <Route path={'posts'} element={<PostsPage/>}/>
-                <Route path={'comments'} element={<CommentsPage/>}/>
+        <Routes>
+            <Route path={'/'} element={<MainLayout/>}>
+                <Route index element={<Navigate to={'movies'}/>}/>
+                <Route path={'movies'} element={<MoviesListPage/>}/>
+                <Route path={'moviesInfo'} element={<MovieInfoPage/>}/>
 
-            </Routes>
-            <MoviesList/>
-            <MovieInfo/>
-        </div>
-    );
+
+        </Route>
+</Routes>
+
+)
+    ;
 }
 
 export default App;

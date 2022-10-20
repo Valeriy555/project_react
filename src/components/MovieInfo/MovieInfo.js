@@ -9,6 +9,8 @@ const MovieInfo = () => {
             {movieFromApi && movieFromApi.overview} <br/>
             {movieFromApi && movieFromApi.imdb_id} <br/>
             {movieFromApi && movieFromApi.original_language} <br/>
+
+
         </div>
     );
 };
