@@ -9,6 +9,10 @@ function App() {
         <div>
             <Routes>
                 <Route path={'/'} element={<MainLayout/>}/>
+                <Route path={'users'} element={<UsersPage/>}/>
+                <Route path={'users/:id'} element={<SingleUserPage/>}/>
+                <Route path={'posts'} element={<PostsPage/>}/>
+                <Route path={'comments'} element={<CommentsPage/>}/>
 
             </Routes>
             <MoviesList/>
