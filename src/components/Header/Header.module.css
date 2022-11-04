@@ -1,9 +1,18 @@
-.header{
-    height: 100px;
+.header {
+    height: 80px;
     display: flex;
     justify-content: center;
     align-items: center;
-    color:azure;
-    background: blue;
+    color: azure;
+    background: #282c34;
+    border: 2px solid brown;
+    padding-top: 2px;
+}
 
+.genre {
+    display: flex;
+}
+h3{
+    margin-top: -2px;
+    color: gold;
 }

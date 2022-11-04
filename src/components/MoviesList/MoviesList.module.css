@@ -2,6 +2,9 @@
     display: flex;
     flex-wrap: wrap;
     padding-left: 50px;
-    background: coral;
+    background: darkblue;
 }
 
+.btn {
+    margin-top: 12px;
+}

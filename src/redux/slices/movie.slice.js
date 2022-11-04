@@ -3,13 +3,12 @@ import {movieService} from "../../services";
 
 
 let initialState = {
-    movies: [],
-    currentMovie: null,
+    results: [],
     loading: false,
     error: null,
-    movieFromApi: null,
-    pages: null,
-    results: []
+    filterParam: '',
+    page: null,
+
 
 }
 
@@ -25,22 +24,24 @@ const getAll = createAsyncThunk(
     }
 );
 
-const getById = createAsyncThunk(
-    'movieSlice/getById',
-    async ({id}, {rejectWithValue}) => {
-        try {
-            const {data} = await movieService.getByIdMovies(id);
-            return data
-        } catch (e) {
-            return rejectWithValue(e.response.data)
-        }
-    }
-);
 
 const movieSlice = createSlice({
     name: 'movieSlice',
     initialState,
-    reducers: {},
+    reducers: {
+        nextPage: (state, action) => {
+            state.page += 1
+        },
+        prevPage: (state, action) => {
+            state.page -= 1
+        },
+        setPage: (state, action) => {
+            state.page = action.payload
+        },
+        setFilterParam: (state, action) => {
+            state.filterParam = action.payload
+        }
+    },
     extraReducers: builder =>
         builder
             .addCase(getAll.fulfilled, (state, action) => {
@@ -59,20 +60,20 @@ const movieSlice = createSlice({
 
                 state.loading = true
             })
-            .addCase(getById.fulfilled, (state, action) => {
-                state.movieFromApi = action.payload
-                state.loading = false
-            })
+
 
 
 })
 
-const {reducer: movieReducer, actions:{}} = movieSlice;
+const {reducer: movieReducer, actions: {nextPage, prevPage, setPage, setFilterParam}} = movieSlice;
 
 const movieActions = {
     getAll,
-    getById
-
+    // getById,
+    nextPage,
+    prevPage,
+    setPage,
+    setFilterParam
 };
 
 export {

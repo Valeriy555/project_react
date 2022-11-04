@@ -1,7 +1,8 @@
 import {Navigate, Route, Routes} from "react-router-dom";
 
 import {MainLayout} from "./layots";
-import {MovieInfoPage, MoviesListPage} from "./pages";
+import {MoviesListPage} from "./pages";
+import {MovieInfo} from "./components";
 
 
 function App() {
@@ -10,7 +11,7 @@ function App() {
             <Route path={'/'} element={<MainLayout/>}>
                 <Route index element={<Navigate to={'movies'}/>}/>
                 <Route path={'movies'} element={<MoviesListPage/>}/>
-                <Route path={'moviesInfo'} element={<MovieInfoPage/>}/>
+                <Route path={'movies/movieInfo'} element={<MovieInfo/>}/>
 
 
         </Route>
