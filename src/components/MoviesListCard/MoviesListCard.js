@@ -16,6 +16,8 @@ const MoviesListCard = ({movie}) => {
     const [genres, setGenres] = useState([])
     const dispatch = useDispatch();
 
+
+
     useEffect(() => {
         dispatch(genreActions.getAllGenres()).then(({payload}) => setGenres(payload.genres))
     }, [])

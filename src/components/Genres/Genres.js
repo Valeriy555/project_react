@@ -1,16 +1,18 @@
 import {useDispatch, useSelector} from "react-redux";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {genreActions, movieActions} from "../../redux";
 
 import {useForm} from "react-hook-form";
+import css from "../Header/Header.module.css";
 
 const Genres = () => {
+    const [genres, setGenres] = useState([])
     const {register, handleSubmit, reset} = useForm();
     const dispatch = useDispatch(); // положить в стор
-    const {genres, loading, error} = useSelector(state => state.genreReducer); // достать из стора
+    // const {genres, loading, error} = useSelector(state => state.genreReducer); // достать из стора
 
     useEffect(() => {
-        dispatch(genreActions.getAllGenres())
+        dispatch(genreActions.getAllGenres()).then(({payload}) => setGenres(payload.genres))
 
     }, [])
 
@@ -21,17 +23,23 @@ const Genres = () => {
 
     return (
         <div>
-            {loading && <h1>Loading........................</h1>}
-            {error && <h1>Error</h1>}
+            {/*{loading && <h1>Loading........................</h1>}*/}
+            {/*{error && <h1>Error</h1>}*/}
             <div>
                 <form onSubmit={handleSubmit(submit)}>
-                    <select {...register('genre')}>
-                        {genres.genres?.map(genre => (
-                            <option key={genre.id} value={genre.id}>{genre.name} - {genre.id} </option>
+                    <select {...register('genre')} className={css.select}>
+                        {genres.map(genre => (
+                            <option key={genre.id} value={genre.id}
+                                 onClick={() => {
+                                    dispatch(genreActions.getGenre(genre))
+                                }}> {genre.name}
+                            </option>
                         ))}
 
                     </select>
                 </form>
+
+
             </div>
 
         </div>

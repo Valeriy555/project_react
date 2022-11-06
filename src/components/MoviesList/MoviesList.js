@@ -1,5 +1,5 @@
 import {useDispatch, useSelector} from "react-redux";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {useSearchParams} from "react-router-dom";
 
 import {movieActions} from "../../redux";
@@ -10,13 +10,36 @@ import Pagination from "../Pagination/Pagination";
 
 const MoviesList = () => {
     const dispatch = useDispatch(); // добавили в стор
-    const {movies, loading, error} = useSelector(state => state.movieReducer); // достали из стор
+    const {page, loading, error, filterParam} = useSelector(state => state.movieReducer); // достали из стор
 
     const [query] = useSearchParams({page: '1'});
 
+    const [movies, setMovies] = useState([])
+    const {genre} = useSelector(state => state.genreReducer)
+
     useEffect(() => {
         dispatch(movieActions.getAll({page: query.get('page')}))
-    }, [dispatch, query])
+            .then(({payload}) => setMovies(payload.results))
+    }, [page, query])
+
+    useEffect(() => {
+
+        if (genre) {
+            setMovies(movies.filter(movie => movie.genre_ids.includes(genre.id)))
+        } else {
+            dispatch(movieActions.getAll({page: query.get('page')}))
+                .then(({payload}) => setMovies(payload.results))
+        }
+
+    }, [genre])
+
+    useEffect(() => {
+        setMovies(movies.filter(movie => movie.title.includes(filterParam)))
+        if (filterParam === '') {
+            dispatch(movieActions.getAll({page: query.get('page')}))
+                .then(({payload}) => setMovies(payload.results))
+        }
+    }, [filterParam])
 
     return (
         <div>
@@ -26,7 +49,14 @@ const MoviesList = () => {
             <div className={css.wrap}>
 
                 {movies?.map(movie => <MoviesListCard key={movie.id} movie={movie}/>)}
-
+                {filterParam !== '' &&
+                    <div >
+                        <button
+                            onClick={() => dispatch(movieActions.setFilterParam(''))}>
+                            Go to movies
+                        </button>
+                    </div>
+                }
                 <Pagination/>
             </div>
 

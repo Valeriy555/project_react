@@ -7,12 +7,59 @@
     background: #282c34;
     border: 2px solid brown;
     padding-top: 2px;
+
 }
 
 .genre {
     display: flex;
+    margin-top: 20px;
 }
-h3{
+
+h3 {
     margin-top: -2px;
     color: gold;
 }
+
+.formHeader {
+    line-height: 20px;
+    background: none;
+    margin-left: 250px;
+    position: relative;
+
+}
+
+.formHeaderInput {
+    font-size: 15px;
+    background: none;
+    border: 1px solid brown;
+    color: #FDC62E;
+    width: 250px;
+    margin-top: -15px;
+}
+
+.formHeaderInput:focus {
+    outline: none;
+}
+
+.inputBtn {
+    font-size: 15px;
+    background: none;
+    border: none;
+    color: #FDC62E;
+    position: absolute;
+    right: 1px;
+}
+
+.select {
+    background: #282c34;
+    border: 1px solid brown;
+    margin-left: 3px;
+    color: #61dafb;
+
+
+}
+
+.select:focus {
+    outline: none;
+}
+

@@ -62,14 +62,12 @@ const movieSlice = createSlice({
             })
 
 
-
 })
 
 const {reducer: movieReducer, actions: {nextPage, prevPage, setPage, setFilterParam}} = movieSlice;
 
 const movieActions = {
     getAll,
-    // getById,
     nextPage,
     prevPage,
     setPage,
