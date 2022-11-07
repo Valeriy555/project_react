@@ -7,8 +7,6 @@ import {Genres} from "../Genres/Genres";
 import css from './Header.module.css';
 import {movieActions} from "../../redux";
 
-
-
 const Header = () => {
 
     const {register, handleSubmit, reset} = useForm({defaultValues: {filter: ''}})
@@ -23,8 +21,9 @@ const Header = () => {
         <header className={css.header}>
 
             <div className={css.genre}>
-                <h3> All Genres: </h3>
+                <h3> Choose a genre: </h3>
                 <Genres/>
+
             </div>
 
             <form className={css.formHeader} onSubmit={handleSubmit(submit)}>

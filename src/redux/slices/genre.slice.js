@@ -38,10 +38,9 @@ const genreSlice = createSlice({
             })
             .addCase(getAllGenres.rejected, (state, action) => { // отклоненный
                 state.error = action.payload
-                state.loading = false
             })
             .addCase(getAllGenres.pending, (state, action) => { // в ожидании
-                state.loading = true
+                state.loading = action.payload
             })
 })
 
