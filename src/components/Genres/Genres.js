@@ -16,9 +16,9 @@ const Genres = () => {
 
     }, [])
 
-    const submit =  (payload) => {
-        console.log(payload);
-
+    const submit =  (data) => {
+        // console.log(dispatch(genreActions.getGenre(genre)));
+        dispatch(movieActions.setFilterParam(data.filter))
     };
 
     return (
