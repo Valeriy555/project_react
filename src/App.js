@@ -14,11 +14,11 @@ function App() {
                 <Route path={'movies/movieInfo'} element={<MovieInfo/>}/>
 
 
-        </Route>
-</Routes>
+            </Route>
+        </Routes>
 
-)
-    ;
+    )
+        ;
 }
 
 export default App;
